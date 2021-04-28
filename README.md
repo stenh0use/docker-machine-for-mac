@@ -32,6 +32,10 @@ Once the new VM is up and running (after `vagrant up` is complete and you're bac
 
 You need to modify your host machine's hosts file (Mac/Linux: `/etc/hosts`; Windows: `%systemroot%\system32\drivers\etc\hosts`), adding the line below:
 
+    <vagrant_ip>  <vagrant_hostname>
+
+eg.
+
     192.168.33.3  docker-debian
 
 (Where `docker-debian`) is the hostname you have configured in the `Vagrantfile`).
