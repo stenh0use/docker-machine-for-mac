@@ -30,7 +30,7 @@ Once the new VM is up and running (after `vagrant up` is complete and you're bac
 
 ### Setting up your hosts file
 
-You need to modify your host machine's hosts file (Mac/Linux: `/etc/hosts`; Windows: `%systemroot%\system32\drivers\etc\hosts`), adding the line below:
+You need to modify your host machine's hosts file (`/etc/hosts`), adding the line below:
 
     <vagrant_ip>  <vagrant_hostname>
 
@@ -63,9 +63,9 @@ CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 ```
 
 ### Final Notes
-Any time you want to expose a port from docker you need to remember that the docker localhost port will have now changed.
+Any time you want to expose a port from docker you need to remember that the docker will have changed from localhost to the IP address on the VM.
 
-eg. exposing ports `-p 8080:80` in docker will mean to query that port you would query the VM IP instead.
+eg. exposing ports `-p 8080:80` in docker will mean to query that port from your mac you would query the VM IP instead.
 
 ```
 curl http://192.168.33.3:8080
