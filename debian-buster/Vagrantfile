@@ -1,0 +1,36 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.box = "debian/buster64"
+  config.ssh.insert_key = false
+
+  config.vm.provider :virtualbox do |v|
+    v.name = "docker-debian"
+    v.memory = 4096
+    v.cpus = 2
+    v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+    v.customize ["modifyvm", :id, "--ioapic", "on"]
+    v.customize ["modifyvm", :id, "--cpuexecutioncap", "50"]
+  end
+
+  config.vm.hostname = "docker-debian"
+  config.vm.network :private_network, ip: "192.168.33.3"
+
+  config.vm.synced_folder "/Users", "/Users"
+
+  # Set the name of the VM. See: http://stackoverflow.com/a/17864388/100134
+  config.vm.define :"docker-debian" do |docker|
+  end
+
+  # Ansible provisioner.
+  config.vm.provision "ansible" do |ansible|
+    ansible.compatibility_mode = "2.0"
+    ansible.playbook = "provisioning/playbook.yml"
+    ansible.inventory_path = "provisioning/inventory"
+    ansible.become = true
+  end
+
+end

@@ -1,0 +1,5 @@
+---
+ntp_timezone: America/New_York
+
+docker_users:
+  - vagrant
