@@ -1,0 +1,4 @@
+---
+dnsmasq_requirements:
+  - "dnsmasq"
+  - "resolvconf"

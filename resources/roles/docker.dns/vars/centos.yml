@@ -1,0 +1,3 @@
+---
+dnsmasq_requirements:
+  - "dnsmasq"

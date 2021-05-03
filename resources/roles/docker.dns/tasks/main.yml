@@ -1,0 +1,54 @@
+---
+- name: import {{ ansible_distribution }} vars
+  include_vars: "{{ ansible_distribution | lower }}.yml"
+
+- name: install dnsmasq requirements
+  package:
+    name: "{{ dnsmasq_requirements }}"
+    state: present
+
+- name: ensure dnsmasq is running and enabled
+  service:
+    name: dnsmasq
+    state: started
+    enabled: true
+
+- name: configure upstream name servers
+  copy:
+    dest: /etc/dnsmasq.d/nameserver.conf
+    content: |
+      {% for nameserver in dnsmasq_nameservers %}
+      server={{ nameserver }}
+      {% endfor %}
+  notify:
+    - restart dnsmasq
+
+- name: configure docker internal hostname
+  copy:
+    dest: /etc/dnsmasq.d/docker.internal
+    content: |
+      address=/host.docker.internal/{{ internal_address }}
+  vars:
+    internal_address: "{{ internal_cidr | ipaddr('1') | ipaddr('address') }}"
+    internal_cidr: "{{ ansible_eth1.ipv4.address }}/{{ ansible_eth1.ipv4.netmask }}"
+  notify:
+    - restart dnsmasq
+
+- name: configure docker custom dns entries
+  copy:
+    dest: /etc/dnsmasq.d/custom.hosts
+    content: |
+      address=/{{ custom_dns.hostname }}/{{ custom_dns.ip_address }}
+  loop: "{{ dnsmasq_custom_hosts }}"
+  loop_control:
+    loop_var: custom_dns
+  notify:
+    - restart dnsmasq
+
+- name: configure docker container dns servers
+  copy:
+    dest: /etc/docker/daemon.json
+    content: |
+      {"dns": ["{{ ansible_ssh_host }}"]}
+  notify:
+    - restart docker service
