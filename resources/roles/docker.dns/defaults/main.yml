@@ -1,0 +1,6 @@
+---
+dnsmasq_nameservers:
+  - "1.1.1.1"
+  - "1.0.0.1"
+
+dnsmasq_custom_hosts: []

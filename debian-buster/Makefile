@@ -1,0 +1,1 @@
+include ../resources/common.mk

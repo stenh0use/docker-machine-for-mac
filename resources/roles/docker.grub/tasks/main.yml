@@ -1,0 +1,8 @@
+---
+- name: Enable vsyscall emulation
+  replace:
+    dest: /etc/default/grub
+    regexp: '^(GRUB_CMDLINE_LINUX_DEFAULT=(?!.* vsyscall)\"[^\"]+)(\".*)'
+    replace: '\1 vsyscall=emulate\2'
+  notify:
+    - update grub

@@ -14,22 +14,16 @@
         cache_valid_time: 3600
       when: ansible_os_family == 'Debian'
 
+    - name: Update all system packages
+      package:
+        name: "*"
+        state: latest
+
   roles:
     - geerlingguy.ntp
     - geerlingguy.docker
-
-  tasks:
-    - name: Enable vsyscall emulation
-      replace:
-        dest: /etc/default/grub
-        regexp: '^(GRUB_CMDLINE_LINUX_DEFAULT=(?!.* vsyscall)\"[^\"]+)(\".*)'
-        replace: '\1 vsyscall=emulate\2'
-      notify:
-        - update grub
-
-  handlers:
-    - name: update grub
-      command: /usr/sbin/update-grub
+    - docker.grub
+    - docker.dns
 
   post_tasks:
     - name: IMPORTANT NOTICE

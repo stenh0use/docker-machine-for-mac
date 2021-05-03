@@ -1,1 +1,3 @@
 .vagrant
+.vscode
+resources/roles/geerlingguy.*

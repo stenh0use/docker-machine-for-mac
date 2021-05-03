@@ -4,12 +4,15 @@
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.box = "debian/buster64"
-  config.vm.box_version = "10.20210409.1"
+  config.vm.box = "centos/stream8"
+  config.vm.box_url = "https://cloud.centos.org/centos/8-stream/x86_64/images/CentOS-Stream-Vagrant-8-20201217.0.x86_64.vagrant-virtualbox.box"
   config.ssh.insert_key = false
+  config.vbguest.installer_options = {
+      allow_kernel_upgrade: true, enablerepo: true
+  }
 
   config.vm.provider :virtualbox do |v|
-    v.name = "docker-debian-10"
+    v.name = "docker-centos-s8"
     v.memory = 4096
     v.cpus = 2
     v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
@@ -18,13 +21,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     v.customize ["modifyvm", :id, "--graphicscontroller", "vmsvga"]
   end
 
-  config.vm.hostname = "docker-debian-10"
-  config.vm.network :private_network, ip: "192.168.33.3"
+  config.vm.hostname = "docker-centos-s8"
+  config.vm.network :private_network, ip: "192.168.44.4"
 
   config.vm.synced_folder "/Users", "/Users"
 
   # Set the name of the VM. See: http://stackoverflow.com/a/17864388/100134
-  config.vm.define :"docker-debian-10" do |docker|
+  config.vm.define :"docker-centos-s8" do |docker|
   end
 
   # Ansible provisioner.
