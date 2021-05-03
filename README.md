@@ -1,10 +1,10 @@
 # Docker for Mac - Docker Machine / Vagrant / Ansible
 
-Motivation: Docker for Mac was proving to be a workflow pain rather than a workflow gain. It was slowing down my 16" Macbook Pro (32GB RAM, 6 CPUs), draining the battery, and causing the fans to constantly spin at full speed. There had also been occurrences where kernel modules had been removed, rendering it difficult to do system development.
-
 If you need docker and kernel modules to support things like SCTP, IP_VS, WireGuard etc. then this project might be for you.
 
-This Vagrant box is intended to replace Docker for Mac and utilises docker-machine, Vagrant, VirtualBox and Ansible, whilst utilising a fully featured linux server.
+These Vagrant boxes are intended to replace Docker for Mac and utilises docker-machine, Vagrant, VirtualBox and Ansible to provide a fully featured linux vm.
+
+Motivation: Docker for Mac was proving to be a workflow pain rather than a workflow gain. It was slowing down my 16" Macbook Pro (32GB RAM, 6 CPUs), draining the battery, and causing the fans to constantly spin at full speed. There had also been occurrences where kernel modules had been removed, rendering it difficult to do system development.
 
 ## Background
 
