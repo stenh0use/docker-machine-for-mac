@@ -114,6 +114,9 @@ Usage:
       - hostname: custom.hostname.local
         ip_address: 192.168.3.1
 
+### SELinux
+CentOS Stream8 Docker Machine's docker daemon is configured with SELinux support enabled (`selinux-enabled`).
+
 ## Author Information
 
 James Stenhouse
