@@ -24,6 +24,8 @@
     - geerlingguy.docker
     - docker.grub
     - docker.dns
+    - docker.selinux
+    - docker.config
 
   post_tasks:
     - name: IMPORTANT NOTICE
