@@ -1,0 +1,7 @@
+---
+- name: 'Enabled the container cgroup boolean'
+  ansible.posix.seboolean:
+    name: container_manage_cgroup
+    state: true
+    persistent: true
+  when: ansible_facts.selinux.status == 'enabled'

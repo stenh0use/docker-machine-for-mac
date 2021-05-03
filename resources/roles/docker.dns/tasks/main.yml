@@ -44,11 +44,3 @@
     loop_var: custom_dns
   notify:
     - restart dnsmasq
-
-- name: configure docker container dns servers
-  copy:
-    dest: /etc/docker/daemon.json
-    content: |
-      {"dns": ["{{ ansible_ssh_host }}"]}
-  notify:
-    - restart docker service
