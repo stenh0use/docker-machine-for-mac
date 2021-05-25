@@ -44,3 +44,22 @@
     loop_var: custom_dns
   notify:
     - restart dnsmasq
+
+- name: disable dnsmasq clobbering resolv.conf
+  ini_file:
+    section: null
+    option: DNSMASQ_EXCEPT
+    value: lo
+    no_extra_spaces: true
+    path: /etc/default/dnsmasq
+  notify:
+    - restart dnsmasq
+
+- name: update dhclient.conf with dns server
+  lineinfile:
+    path: /etc/dhcp/dhclient.conf
+    state: present
+    regexp: '^supersede domain-name-servers'
+    line: 'supersede domain-name-servers {{ ansible_eth1.ipv4.address }};'
+  notify:
+    - renew dhcp
