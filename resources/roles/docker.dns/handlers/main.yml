@@ -3,3 +3,6 @@
   service:
     name: dnsmasq
     state: restarted
+
+- name: renew dhcp
+  shell: dhclient -r && dhclient

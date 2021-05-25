@@ -4,9 +4,6 @@
     dest: /etc/docker/daemon.json
     content: |
       {
-        "dns": [
-          "{{ ansible_ssh_host }}"
-        ],
         {% if ansible_facts.selinux.status == 'enabled' %}
         "selinux-enabled": true,
         {% endif %}
