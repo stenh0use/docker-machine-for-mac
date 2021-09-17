@@ -82,7 +82,8 @@ install-requirements:
 	@ ansible-galaxy install -r ../resources/requirements.yml -p ../resources/roles && \
 	VBG_PLUGIN=`vagrant plugin list | grep vagrant-vbguest || true` && \
 	if [ -z "$$VBG_PLUGIN" ]; then \
-		vagrant plugin install vagrant-vbguest; \
+		vagrant plugin install vagrant-vbguest && \
+		vagrant plugin install vagrant-disksize; \
 	else \
 		echo "vagrant-vbguest is already installed"; \
 	fi

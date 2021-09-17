@@ -7,11 +7,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "debian/buster64"
   config.vm.box_version = "10.20210409.1"
   config.ssh.insert_key = false
+  config.disksize.size = "50GB"
 
   config.vm.provider :virtualbox do |v|
     v.name = "docker-debian-10"
-    v.memory = 4096
-    v.cpus = 2
+    v.memory = 8192
+    v.cpus = 4
     v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
     v.customize ["modifyvm", :id, "--ioapic", "on"]
     v.customize ["modifyvm", :id, "--cpuexecutioncap", "80"]
