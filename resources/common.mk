@@ -38,7 +38,7 @@ docker-machine-check:
 	\"docker-machine env $(VAGRANT_HOST)\" to your ~/.bash_profile$(RESET)
 
 define vagrant-reload
-	vagrant reload
+	export VAGRANT_EXPERIMENTAL="disks" && vagrant reload
 endef
 
 .PHONY: vagrant-reload
@@ -51,7 +51,7 @@ vagrant-destroy: check-clean
 
 .PHONY: vagrant-up
 vagrant-up:
-	@ vagrant up
+	@ export VAGRANT_EXPERIMENTAL="disks" && vagrant up
 
 .PHONY: vagrant-halt
 vagrant-halt:
@@ -82,8 +82,7 @@ install-requirements:
 	@ ansible-galaxy install -r ../resources/requirements.yml -p ../resources/roles && \
 	VBG_PLUGIN=`vagrant plugin list | grep vagrant-vbguest || true` && \
 	if [ -z "$$VBG_PLUGIN" ]; then \
-		vagrant plugin install vagrant-vbguest && \
-		vagrant plugin install vagrant-disksize; \
+		vagrant plugin install vagrant-vbguest \
 	else \
 		echo "vagrant-vbguest is already installed"; \
 	fi
