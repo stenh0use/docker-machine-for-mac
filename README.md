@@ -21,7 +21,7 @@ To use the vagrant file, you will need to have done the following:
   1. Download and Install [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
   2. Download and Install [Vagrant](https://www.vagrantup.com/downloads.html)
   3. If you want to completely remove Docker for Mac [run this script](https://github.com/docker/toolbox/blob/master/osx/uninstall.sh) (recommended)
-  4. If you removed Docker for Mac you'll then need to [Download and install](https://docs.docker.com/engine/install/binaries/) the `docker` cli binary
+  4. If you removed Docker for Mac you'll then need to [Download and install](https://docs.docker.com/engine/install/binaries/) the `docker-cli` binary
   4. Install Docker Machine [docker-machine](https://gitlab.com/gitlab-org/ci-cd/docker-machine/-/blob/main/docs/install-machine.md)
   5. Install [Ansible](http://docs.ansible.com/ansible/latest/intro_installation.html)
   6. Open a shell prompt (Terminal app on a Mac) and cd into the folder containing the `Vagrantfile` of the target operating systems that you want to build.
