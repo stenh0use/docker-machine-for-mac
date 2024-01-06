@@ -1,5 +1,7 @@
 # Docker for Mac - Docker Machine / Vagrant / Ansible
 
+:warning: **I no longer used this repo and recommend using [colima](https://github.com/abiosoft/colima) instead** :warning:
+
 If you need docker and kernel modules to support things like SCTP, IP_VS, WireGuard etc. then this project might be for you.
 
 These Vagrant boxes are intended to replace Docker for Mac and utilises docker-machine, Vagrant, VirtualBox and Ansible to provide a fully featured linux vm.
